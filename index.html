@@ -152,7 +152,7 @@
         <!-- Ảnh & Lời ngỏ -->
         <div class="section">
             <div class="profile-img">
-                <!-- Thay link ảnh của bạn vào đây -->
+                <!-- Link ảnh cá nhân của bạn -->
                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Avatar">
             </div>
             <p style="text-align: center; font-size: 1.1rem; color: #555;">
@@ -203,6 +203,9 @@
     </div>
 
     <script>
+        // Đường dẫn Web App Google Apps Script đã cấu hình của bạn
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymYK8J0YjNUHMqFGNtJPWIMqGZkY-3aqT3Dmq1-BIcN2wg_2Av-U4ckJ3Sm67eK-DO/exec";
+
         // Tải danh sách lưu bút đã lưu khi mở trang
         document.addEventListener("DOMContentLoaded", loadWishes);
 
@@ -215,18 +218,33 @@
                 return;
             }
 
-            const newWish = { name, wish, date: new Date().toLocaleDateString('vi-VN') };
+            const currentDate = new Date().toLocaleDateString('vi-VN');
+            const newWish = { name, wish, date: currentDate };
             
-            // Lấy danh sách cũ từ localStorage
+            // Lấy danh sách cũ từ localStorage để hiện ngay lập tức cho người gửi thấy
             let wishes = JSON.parse(localStorage.getItem("grad_wishes")) || [];
-            wishes.unshift(newWish); // Thêm lên đầu danh sách
-            
+            wishes.unshift(newWish);
             localStorage.setItem("grad_wishes", JSON.stringify(wishes));
+
+            // Gửi ngầm dữ liệu về Google Sheets để bạn (chủ nhân) xem được
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name: name, wish: wish, date: currentDate })
+            }).then(() => {
+                console.log("Đã gửi lời chúc về file Google Sheets!");
+            }).catch(error => {
+                console.error("Lỗi khi gửi:", error);
+            });
 
             // Reset form và load lại danh sách
             document.getElementById("senderName").value = "";
             document.getElementById("senderWish").value = "";
             loadWishes();
+            alert("✨ Gửi lời chúc thành công! Cảm ơn bạn rất nhiều ạ!");
         }
 
         function loadWishes() {
