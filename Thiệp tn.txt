@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Mời Lễ Tốt Nghiệp</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .container {
+            max-width: 800px;
+            margin: -30px auto 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #764ba2;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .profile-img {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .profile-img img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .info-box {
+            background: #f1f3f5;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .info-box h3 {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        .info-box p {
+            font-size: 1rem;
+            color: #212529;
+            font-weight: 600;
+        }
+        .map-container {
+            width: 100%;
+            height: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 0;
+        }
+        .guestbook-form input, .guestbook-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+        .guestbook-form button {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .guestbook-form button:hover {
+            background: #5a3782;
+        }
+        .wishes-list {
+            margin-top: 25px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .wish-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .wish-item h4 {
+            font-size: 0.95rem;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        .wish-item p {
+            font-size: 1rem;
+            color: #212529;
+        }
+        footer {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Thư Mời Lễ Tốt Nghiệp</h1>
+        <p>Sự hiện diện của bạn là niềm vinh hạnh lớn đối với mình!</p>
+    </header>
+
+    <div class="container">
+        <!-- Ảnh & Lời ngỏ -->
+        <div class="section">
+            <div class="profile-img">
+                <!-- Thay link ảnh của bạn vào đây -->
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Avatar">
+            </div>
+            <p style="text-align: center; font-size: 1.1rem; color: #555;">
+                Thế là chặng đường đại học khép lại. Mình rất mong sự có mặt của bạn trong ngày lễ tốt nghiệp quan trọng này để cùng chung vui và lưu lại những bức ảnh kỷ niệm tuyệt đẹp nhé!
+            </p>
+        </div>
+
+        <!-- Thời gian & Địa điểm -->
+        <div class="section">
+            <h2>Thông Tin Sự Kiện</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>⏰ Thời Gian</h3>
+                    <p>08:30 Sáng - Chủ Nhật, 27/09/2026</p>
+                </div>
+                <div class="info-box">
+                    <h3>📍 Địa Điểm</h3>
+                    <p>Hội trường lớn, Đại học Bách khoa Hà Nội</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bản đồ trường -->
+        <div class="section">
+            <h2>Bản Đồ Đến Trường</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4673827618037!2d105.84271897531737!3d21.004940888043063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac76ccab6dd7%3A0x5589253c2e63f10!2zROG6oWkgROG7jWMgQuOhY2giIEhvw6AgIEjDoCBO4buZaQ!5e0!3m2!1svi!2svn!4v1690000000000!5m2!1svi!2svn" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <!-- Góc lưu bút -->
+        <div class="section">
+            <h2>Góc Lưu Bút Nhắn Gửi</h2>
+            <div class="guestbook-form">
+                <input type="text" id="senderName" placeholder="Tên của bạn / Biệt danh..." required>
+                <textarea id="senderWish" rows="3" placeholder="Nhập lời chúc tốt đẹp dành cho mình..." required></textarea>
+                <button onclick="addWish()">Gửi Lời Chúc</button>
+            </div>
+            
+            <div class="wishes-list" id="wishesContainer">
+                <!-- Danh sách lời chúc sẽ hiện ở đây -->
+            </div>
+        </div>
+
+        <footer>
+            Cảm ơn bạn vì đã luôn đồng hành cùng mình chặng đường qua ❤️
+        </footer>
+    </div>
+
+    <script>
+        // Tải danh sách lưu bút đã lưu khi mở trang
+        document.addEventListener("DOMContentLoaded", loadWishes);
+
+        function addWish() {
+            const name = document.getElementById("senderName").value.trim();
+            const wish = document.getElementById("senderWish").value.trim();
+
+            if (!name || !wish) {
+                alert("Vui lòng nhập đầy đủ tên và lời chúc nhé!");
+                return;
+            }
+
+            const newWish = { name, wish, date: new Date().toLocaleDateString('vi-VN') };
+            
+            // Lấy danh sách cũ từ localStorage
+            let wishes = JSON.parse(localStorage.getItem("grad_wishes")) || [];
+            wishes.unshift(newWish); // Thêm lên đầu danh sách
+            
+            localStorage.setItem("grad_wishes", JSON.stringify(wishes));
+
+            // Reset form và load lại danh sách
+            document.getElementById("senderName").value = "";
+            document.getElementById("senderWish").value = "";
+            loadWishes();
+        }
+
+        function loadWishes() {
+            const container = document.getElementById("wishesContainer");
+            const wishes = JSON.parse(localStorage.getItem("grad_wishes")) || [];
+
+            if (wishes.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: #adb5bd; font-style: italic;">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé!</p>`;
+                return;
+            }
+
+            let html = "";
+            wishes.forEach(item => {
+                html += `
+                    <div class="wish-item">
+                        <h4><strong>${escapeHtml(item.name)}</strong> <span style="font-size: 0.8rem; color: #888; font-weight: normal; float: right;">${item.date}</span></h4>
+                        <p>${escapeHtml(item.wish)}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Hàm bảo mật chống lỗi ký tự đặc biệt
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
