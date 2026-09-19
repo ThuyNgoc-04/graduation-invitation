@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Mời Lễ Tốt Nghiệp</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fff0f5; /* Hồng nhạt nền lót */
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- HIỆU ỨNG CÁNH HOA / TRÁI TIM BAY NỀN --- */
+        .falling-petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+        .petal {
+            position: absolute;
+            background: rgba(255, 117, 140, 0.6);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* --- HIỆU ỨNG TRÁI TIM BUNG KHI GỬI LỜI CHÚC --- */
+        .burst-heart {
+            position: fixed;
+            font-size: 1.5rem;
+            animation: burst 1s ease-out forwards;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        @keyframes burst {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .container {
+            max-width: 800px;
+            margin: -30px auto 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #d81b60;
+            border-bottom: 2px solid #ffe4e1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .profile-img {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .profile-img img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff5f8;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.2);
+        }
+
+        /* --- NÚT SAO CHÉP LIÊN KẾT --- */
+        .share-box {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .share-btn {
+            background: #fff;
+            color: #d81b60;
+            border: 2px solid #ff758c;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 117, 140, 0.1);
+        }
+        .share-btn:hover {
+            background: #ff758c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* --- ĐỒNG HỒ ĐẾM NGƯỢC --- */
+        .countdown-box {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        .countdown-item {
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff758c 100%);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 75px;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+        }
+        .countdown-item span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .countdown-item small {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .info-box {
+            background: #fff0f3;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #ffccd5;
+        }
+        .info-box h3 {
+            font-size: 1.1rem;
+            color: #c9184a;
+            margin-bottom: 8px;
+        }
+        .info-box p {
+            font-size: 1rem;
+            color: #212529;
+            font-weight: 600;
+        }
+        .map-container {
+            width: 100%;
+            height: 350px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #ffccd5;
+        }
+
+        /* --- ALBUM POLAROID --- */
+        .polaroid-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px 0;
+        }
+        .polaroid-card {
+            background: #fff;
+            padding: 12px 12px 25px 12px;
+            width: 200px;
+            border-radius: 4px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        .polaroid-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            border-radius: 2px;
+        }
+        .polaroid-card p {
+            text-align: center;
+            font-family: 'Montserrat', cursive, sans-serif;
+            font-size: 0.85rem;
+            color: #d81b60;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        .polaroid-card:nth-child(odd) { transform: rotate(-3deg); }
+        .polaroid-card:nth-child(even) { transform: rotate(4deg); }
+        .polaroid-card:nth-child(3n) { transform: rotate(-5deg); }
+        .polaroid-card:nth-child(5n) { transform: rotate(3deg); }
+        .polaroid-card:hover {
+            transform: scale(1.08) rotate(0deg) !important;
+            z-index: 10;
+            box-shadow: 0 12px 25px rgba(216, 27, 96, 0.25);
+        }
+
+        .guestbook-form input, .guestbook-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ffb3c6;
+            border-radius: 8px;
+            font-family: inherit;
+            outline: none;
+        }
+        .guestbook-form input:focus, .guestbook-form textarea:focus {
+            border-color: #ff4d6d;
+            box-shadow: 0 0 5px rgba(255, 77, 109, 0.3);
+        }
+        .guestbook-form button {
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff758c 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .guestbook-form button:hover {
+            opacity: 0.9;
+        }
+        .wishes-list {
+            margin-top: 25px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .wish-item {
+            background: #fff0f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #ff4d6d;
+        }
+        .wish-item h4 {
+            font-size: 0.95rem;
+            color: #c9184a;
+            margin-bottom: 5px;
+        }
+        .wish-item p {
+            font-size: 1rem;
+            color: #212529;
+        }
+        footer {
+            text-align: center;
+            color: #a53860;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hiệu ứng cánh hoa/trái tim bay nền -->
+    <div class="falling-petals" id="petalsContainer"></div>
+
+    <header>
+        <h1>Thư Mời Lễ Tốt Nghiệp Ngọc Đáng Yêu</h1>
+        <p>Chúc mừng bạn là 1 trong những người may mắn được người đẹp nhất trên thế gian vô cùng iu quý!</p>
+    </header>
+
+    <div class="container">
+        <!-- Nút Sao Chép Liên Kết -->
+        <div class="share-box">
+            <button class="share-btn" onclick="copyLink()">📋 Sao Chép Link Thiệp Mời</button>
+        </div>
+
+        <!-- Ảnh & Lời ngỏ -->
+        <div class="section">
+            <div class="profile-img">
+                <img src="avatar.jpg" alt="Avatar của Ngọc">
+            </div>
+            <p style="text-align: center; font-size: 1.1rem; color: #555;">
+                4 năm đại học của mình đã kết thúc với mình. Cảm ơn bạn đã và vẫn luôn ở cạnh mình, rất mong chúng ta sẽ còn bên cạnh nhau trong những bước ngoặt khác. Mình rất mong sự có mặt của bạn trong ngày lễ tốt nghiệp quan trọng này để cùng chung vui và lưu lại những bức ảnh kỷ niệm tuyệt đẹp nhé.
+            </p>
+        </div>
+
+        <!-- Thời gian & Địa điểm kèm Đồng hồ đếm ngược -->
+        <div class="section">
+            <h2>Thông Tin Sự Kiện Của Ngọc</h2>
+            
+            <div class="countdown-box" id="countdown">
+                <div class="countdown-item"><span id="days">00</span><small>Ngày</small></div>
+                <div class="countdown-item"><span id="hours">00</span><small>Giờ</small></div>
+                <div class="countdown-item"><span id="minutes">00</span><small>Phút</small></div>
+                <div class="countdown-item"><span id="seconds">00</span><small>Giây</small></div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>⏰ Thời Gian</h3>
+                    <p>10:00 - 16:30 Chủ Nhật, 27/09/2026</p>
+                </div>
+                <div class="info-box">
+                    <h3>📍 Địa Điểm</h3>
+                    <p>Hội trường C2, Đại học Bách khoa Hà Nội</p>
+                    <p style="font-size: 0.85rem; color: #c9184a; margin-top: 5px;">Đến là anh đónnn</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bản đồ và Sơ đồ gửi xe -->
+        <div class="section">
+            <h2>Bản Đồ & Khu Vực Gửi Xe</h2>
+            <p style="margin-bottom: 15px; color: #555; font-size: 0.95rem;">Bạn có thể xem bản đồ trực tuyến hoặc tham khảo sơ đồ các vị trí để xe chi tiết dưới đây nhé:</p>
+            
+            <div class="map-container" style="margin-bottom: 20px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4673827618037!2d105.84271897531737!3d21.004940888043063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac76ccab6dd7%3A0x5589253c2e63f10!2sF3R9K89h!5e0!3m2!1svi!2svn!4v1690000000000!5m2!1svi!2svn" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div style="text-align: center; background: #fff0f3; padding: 15px; border-radius: 12px; border: 1px solid #ffccd5;">
+                <h3 style="color: #c9184a; margin-bottom: 10px; font-size: 1.1rem;">🛵 Sơ Đồ Chi Tiết Các Vị Trí Để Xe</h3>
+                <img src="parking-map.jpg" alt="Sơ đồ gửi xe Bách Khoa" style="width: 100%; max-height: 400px; object-fit: contain; border-radius: 8px; border: 1px solid #ffb3c6;">
+                <p style="font-size: 0.9rem; color: #c9184a; margin-top: 10px; font-weight: 600;">Bạn có thể gửi xe ở D3, xuống hầm C7, bãi xe ở bên trái thư viện, bãi xe ở D8</p>
+            </div>
+        </div>
+
+        <!-- Album Ảnh Kỷ Yếu (10 ảnh Polaroid) -->
+        <div class="section">
+            <h2>Khoảnh Khắc Kỷ Yếu Của Tui 📸</h2>
+            <p style="margin-bottom: 15px; color: #555; font-size: 0.95rem; text-align: center;">Rà chuột vào từng bức ảnh để xem khoảnh khắc thanh xuân nhé:</p>
+            
+            <div class="polaroid-grid">
+                <div class="polaroid-card"><img src="photo1.jpg" alt="Ảnh 1"><p>✨ Kỷ niệm đẹp</p></div>
+                <div class="polaroid-card"><img src="photo2.jpg" alt="Ảnh 2"><p>🌸 Thanh xuân rực rỡ</p></div>
+                <div class="polaroid-card"><img src="photo3.jpg" alt="Ảnh 3"><p>🎓 Tốt nghiệp rồi!</p></div>
+                <div class="polaroid-card"><img src="photo4.jpg" alt="Ảnh 4"><p>💖 Bách Khoa yêu dấu</p></div>
+                <div class="polaroid-card"><img src="photo5.jpg" alt="Ảnh 5"><p>🌻 Cùng bạn bè</p></div>
+                <div class="polaroid-card"><img src="photo6.jpg" alt="Ảnh 6"><p>🌟 Ngày rực rỡ</p></div>
+                <div class="polaroid-card"><img src="photo7.jpg" alt="Ảnh 7"><p>🎈 Tuổi trẻ tươi đẹp</p></div>
+                <div class="polaroid-card"><img src="photo8.jpg" alt="Ảnh 8"><p>🍀 Lưu giữ thanh xuân</p></div>
+                <div class="polaroid-card"><img src="photo9.jpg" alt="Ảnh 9"><p>💫 Chặng đường mới</p></div>
+                <div class="polaroid-card"><img src="photo10.jpg" alt="Ảnh 10"><p>❤️ Mãi nhớ về nhau</p></div>
+            </div>
+        </div>
+
+        <!-- Góc lưu bút -->
+        <div class="section">
+            <h2>Góc Lưu Bút Nhắn Gửi Yêu Thương Tới Tui</h2>
+            <div class="guestbook-form">
+                <input type="text" id="senderName" placeholder="Tên của bạn / Biệt danh..." required>
+                <textarea id="senderWish" rows="3" placeholder="Nhập lời chúc tốt đẹp dành cho mình..." required></textarea>
+                <button onclick="addWish(event)">Gửi Lời Chúc</button>
+            </div>
+            
+            <div class="wishes-list" id="wishesContainer">
+                <!-- Danh sách lời chúc sẽ hiện ở đây -->
+            </div>
+        </div>
+
+        <footer>
+            Cảm ơn bạn vì đã luôn đồng hành cùng mình chặng đường qua ❤️
+        </footer>
+    </div>
+
+    <script>
+        // --- 1. HIỆU ỨNG CÁNH HOA / TRÁI TIM BAY NỀN ---
+        function createPetal() {
+            const container = document.getElementById('petalsContainer');
+            if (!container) return;
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            
+            const size = Math.random() * 8 + 8 + 'px';
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+            petal.style.opacity = Math.random() * 0.7 + 0.3;
+
+            container.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 10000);
+        }
+        setInterval(createPetal, 400);
+
+        // --- 2. HÀM SAO CHÉP LIÊN KẾT ---
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("✨ Đã sao chép đường dẫn thiệp mời! Bạn có thể gửi ngay cho bạn bè rồi nhé!");
+            }).catch(err => {
+                alert("Không thể sao chép tự động, bạn hãy copy đường dẫn trên thanh địa chỉ trình duyệt nhé!");
+            });
+        }
+
+        // --- 3. HIỆU ỨNG BUNG TRÁI TIM KHI GỬI LỜI CHÚC ---
+        function createHeartBurst(x, y) {
+            const emojis = ['💖', '💕', '💗', '💓', '✨', '🌸'];
+            for (let i = 0; i < 12; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('burst-heart');
+                heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 100 + 50;
+                const dx = Math.cos(angle) * distance + 'px';
+                const dy = Math.sin(angle) * distance + 'px';
+                
+                heart.style.setProperty('--dx', dx);
+                heart.style.setProperty('--dy', dy);
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+
+        // --- 4. ĐỒNG HỒ ĐẾM NGƯỢC ĐẾN NGÀY 27/09/2026 ---
+        const eventDate = new Date("2026-09-27T10:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "<p style='color: #d81b60; font-weight: bold; font-size: 1.1rem; text-align: center;'>🎉 Lễ tốt nghiệp đang diễn ra hoặc đã kết thúc rồi! Cảm ơn bạn đã đến chung vui! 🎉</p>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- 5. TÍNH NĂNG LƯU BÚT ---
+        document.addEventListener("DOMContentLoaded", loadWishes);
+
+        function addWish(event) {
+            const name = document.getElementById("senderName").value.trim();
+            const wish = document.getElementById("senderWish").value.trim();
+
+            if (!name || !wish) {
+                alert("Vui lòng nhập đầy đủ tên và lời chúc nhé!");
+                return;
+            }
+
+            // Kích hoạt hiệu ứng trái tim bung tại vị trí nút bấm
+            const rect = event.target.getBoundingClientRect();
+            createHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+            const newWish = { name, wish, date: new Date().toLocaleDateString('vi-VN') };
+            
+            let wishes = JSON.parse(localStorage.getItem("grad_wishes")) || [];
+            wishes.unshift(newWish);
+            
+            localStorage.setItem("grad_wishes", JSON.stringify(wishes));
+
+            document.getElementById("senderName").value = "";
+            document.getElementById("senderWish").value = "";
+            loadWishes();
+        }
+
+        function loadWishes() {
+            const container = document.getElementById("wishesContainer");
+            const wishes = JSON.parse(localStorage.getItem("grad_wishes")) || [];
+
+            if (wishes.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: #adb5bd; font-style: italic;">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé!</p>`;
+                return;
+            }
+
+            let html = "";
+            wishes.forEach(item => {
+                html += `
+                    <div class="wish-item">
+                        <h4><strong>${escapeHtml(item.name)}</strong> <span style="font-size: 0.8rem; color: #a53860; font-weight: normal; float: right;">${item.date}</span></h4>
+                        <p>${escapeHtml(item.wish)}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
